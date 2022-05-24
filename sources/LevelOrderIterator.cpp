@@ -45,19 +45,40 @@ namespace ariel
         buildVec(tempQ);
     }
 
-    // OrgChart::LevelOrderIterator::~LevelOrderIterator()
-    // {
-    //     for(uint i = 0; i < this->iterVec->size(); i++)
-    //     {
-    //         delete(this->iterVec->at(i));
-    //     }
-    //     delete(this->iterVec);
-    // }
+    OrgChart::LevelOrderIterator::~LevelOrderIterator()
+    {
+        // for(uint i = 0; i < this->iterVec->size(); i++)
+        // {
+        //     delete(this->iterVec->at(i));
+        // }
+        // delete(this->iterVec);
+    }
+
+    OrgChart::LevelOrderIterator& OrgChart::LevelOrderIterator::operator=(const LevelOrderIterator& other)
+    {
+        *this = LevelOrderIterator{other};
+        return *this;
+    }
+
+    OrgChart::LevelOrderIterator::LevelOrderIterator (OrgChart::LevelOrderIterator && obj) noexcept
+    {
+        // Move constructor
+        // It will simply shift the resources,
+        // without creating a copy.
+        this->iterVec = obj.iterVec;
+        obj.iterVec = nullptr;
+        this->pointerIndToCurrNode = obj.pointerIndToCurrNode;
+    }
 
     string& OrgChart::LevelOrderIterator::operator*() const //accessing the name of the node (the only interesting information of the tree)
     {
         string* ret = new string(this->iterVec->at(uint(this->pointerIndToCurrNode))->getName());
         return *ret;
+    }
+
+    OrgChart::LevelOrderIterator& OrgChart::LevelOrderIterator::operator=(OrgChart::LevelOrderIterator&& other) noexcept
+    {
+        return *this;
     }
 
     string* OrgChart::LevelOrderIterator::operator->() const //accessing the name of the node (the only interesting information of the tree)

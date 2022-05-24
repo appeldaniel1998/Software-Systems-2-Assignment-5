@@ -27,7 +27,10 @@ namespace ariel
                 public:
                     LevelOrderIterator(OrgChart* ptr = nullptr);
                     LevelOrderIterator(const LevelOrderIterator &other);
-                    // ~LevelOrderIterator();
+                    ~LevelOrderIterator();
+                    LevelOrderIterator& operator=(const LevelOrderIterator& other);
+                    LevelOrderIterator (LevelOrderIterator && obj) noexcept;
+                    LevelOrderIterator& operator=(LevelOrderIterator&& other) noexcept;
                     std::string& operator*() const;
                     std::string* operator->() const;
                     LevelOrderIterator& operator++(); //++i
@@ -48,7 +51,10 @@ namespace ariel
                 public:
                     ReverseOrderIterator(OrgChart* ptr = nullptr);
                     ReverseOrderIterator(const ReverseOrderIterator &other);
-                    // ~ReverseOrderIterator();
+                    ~ReverseOrderIterator();
+                    ReverseOrderIterator& operator=(const ReverseOrderIterator& other);
+                    ReverseOrderIterator (ReverseOrderIterator && obj) noexcept;
+                    ReverseOrderIterator& operator=(ReverseOrderIterator&& other) noexcept;
                     std::string& operator*() const;
                     std::string* operator->() const;
                     ReverseOrderIterator& operator++(); //++i
@@ -68,7 +74,10 @@ namespace ariel
                 public:
                     PreOrderIterator(OrgChart* ptr = nullptr);
                     PreOrderIterator(const PreOrderIterator &other);
-                    // ~PreOrderIterator();
+                    ~PreOrderIterator();
+                    PreOrderIterator& operator=(const PreOrderIterator& other);
+                    PreOrderIterator (PreOrderIterator && obj) noexcept;
+                    PreOrderIterator& operator=(PreOrderIterator&& other) noexcept;
                     std::string& operator*() const;
                     std::string* operator->() const;
                     PreOrderIterator& operator++(); //++i

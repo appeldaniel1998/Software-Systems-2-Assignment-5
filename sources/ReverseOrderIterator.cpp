@@ -61,14 +61,35 @@ namespace ariel
         return buildVec(tempQ, tempVec);
     }
 
-    // OrgChart::ReverseOrderIterator::~ReverseOrderIterator()
-    // {
-    //     for(uint i = 0; i < this->iterVec->size(); i++)
-    //     {
-    //         delete(this->iterVec->at(i));
-    //     }
-    //     delete(this->iterVec);
-    // }
+    OrgChart::ReverseOrderIterator::~ReverseOrderIterator()
+    {
+        // for(uint i = 0; i < this->iterVec->size(); i++)
+        // {
+        //     delete(this->iterVec->at(i));
+        // }
+        // delete(this->iterVec);
+    }
+
+    OrgChart::ReverseOrderIterator& OrgChart::ReverseOrderIterator::operator=(const ReverseOrderIterator& other)
+    {
+        *this = ReverseOrderIterator{other};
+        return *this;
+    }
+
+    OrgChart::ReverseOrderIterator::ReverseOrderIterator (OrgChart::ReverseOrderIterator && obj) noexcept
+    {
+        // Move constructor
+        // It will simply shift the resources,
+        // without creating a copy.
+        this->iterVec = obj.iterVec;
+        obj.iterVec = nullptr;
+        this->pointerIndToCurrNode = obj.pointerIndToCurrNode;
+    }
+
+    OrgChart::ReverseOrderIterator& OrgChart::ReverseOrderIterator::operator=(OrgChart::ReverseOrderIterator&& other) noexcept
+    {
+        return *this;
+    }
 
     string& OrgChart::ReverseOrderIterator::operator*() const //accessing the name of the node (the only interesting information of the tree)
     {
